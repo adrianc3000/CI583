@@ -113,7 +113,6 @@ public class Hashtable<V> {
 	 * @return
 	 */
 	public boolean hasKey(String key) {
-		//return arr.equals(key);
 		throw new UnsupportedOperationException("Method not implemented");
 	}
 
@@ -127,7 +126,7 @@ public class Hashtable<V> {
 			Object z = arr[i];
 			keyList.add(z);
 		}
-		//return keyList;
+		throw new UnsupportedOperationException("Method not implemented");
 	}
 
 	/**
@@ -135,7 +134,7 @@ public class Hashtable<V> {
 	 * @return
 	 */
 	public double getLoadFactor() {
-		System.out.println("DEBUG: Item count is: " + itemCount + " and load factor is: " + itemCount/(double)max);
+		//System.out.println("DEBUG: Item count is: " + itemCount + " and load factor is: " + itemCount/(double)max);
 		if (itemCount == 0) {
 			return 0;
 		}
@@ -250,7 +249,13 @@ public class Hashtable<V> {
 	 * @return
 	 */
 	private int hash(String key) {
-		return key.hashCode() % max; //check lecture slides for further hash implementation
+		//return Math.abs(key.hashCode() % max); //check lecture slides for further hash implementation
+		int hashValue = key.charAt(0) - 96;
+		for (int i = 0; i < key.length(); i++) {
+			int character = key.charAt(i) - 96;
+			hashValue = Math.abs((hashValue * 27 + character) % max);
+		}
+		return hashValue;
 	}
 
 	/**
@@ -279,7 +284,7 @@ public class Hashtable<V> {
 	 * @return
 	 */
 	private int nextPrime(int n) {
-		System.out.println("DEBUG: nextPrime is " + n);
+		//System.out.println("DEBUG: nextPrime is " + n);
 		if (isPrime(n)) {
 			return n;
 		}
@@ -305,7 +310,7 @@ public class Hashtable<V> {
 				put(p.key, p.value);
 			}
 		}
-		System.out.println("DEBUG: resize my loadfactor is " + getLoadFactor());
+		//System.out.println("DEBUG: resize my loadfactor is " + getLoadFactor());
 	}
 
 	
